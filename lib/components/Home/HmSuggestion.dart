@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+
+class Hmsuggestion extends StatefulWidget {
+  const Hmsuggestion({super.key});
+
+  @override
+  State<Hmsuggestion> createState() => _HmsuggestionState();
+}
+
+class _HmsuggestionState extends State<Hmsuggestion> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Container(
+        color: Colors.blue,
+        alignment: Alignment.center,
+        height: 200,
+        child: Text('建议', style: TextStyle(color: Colors.black)),
+      ),
+    );
+  }
+}
