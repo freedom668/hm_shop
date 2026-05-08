@@ -49,6 +49,7 @@ class _HomeViewState extends State<HomeView> {
     _getProductList();
     _getInVogueList();
     _getOneStopList();
+    _getRecommendList();
   }
 
   /// 获取特惠推荐
@@ -82,6 +83,16 @@ class _HomeViewState extends State<HomeView> {
     setState(() {});
   }
 
+  // 推荐列表
+  List<GoodDetailItem> _recommendList = [];
+ 
+  // 获取推荐列表
+  void _getRecommendList() async {
+    _recommendList = await getRecommendListAPI({"limit": 10});
+    setState(() {});
+  }
+
+
   List<Widget> _getScrollChildren() {
     return [
       SliverToBoxAdapter(child: Hmslider(bannerList: _bannerList)),
@@ -108,7 +119,7 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       SliverToBoxAdapter(child: SizedBox(height: 10)),
-      HmMoreList(),
+      HmMoreList(recommendList: _recommendList), // 无限滚动列表
     ];
   }
 
