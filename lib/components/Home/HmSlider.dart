@@ -24,10 +24,10 @@ class _HmsliderState extends State<Hmslider> {
         child: Container(
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.symmetric(horizontal: 40),
-          height: 50,
+          height: 40,
           decoration: BoxDecoration(
             color: const Color.fromRGBO(0, 0, 0, 0.4),
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
             "搜索...",

@@ -34,13 +34,34 @@ class _HomeViewState extends State<HomeView> {
     //),
   ];
 
+  SpecialRecommendResult _specialRecommendResult = SpecialRecommendResult(
+    id: '',
+    title: '',
+    subTypes: [],
+  );
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getBannerList();
+    _getCategoryList();
+    _getProductList();
+  }
+
+  /// 获取特惠推荐
+  void _getProductList() async{
+    _specialRecommendResult = await getProductListApi();
+    setState(() {});
+  }
+
   List<Widget> _getScrollChildren() {
     return [
       SliverToBoxAdapter(child: Hmslider(bannerList: _bannerList)),
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(child: HmCategory(categoryList: _categoryList)),
       SliverToBoxAdapter(child: SizedBox(height: 10)),
-      SliverToBoxAdapter(child: Hmsuggestion()),
+      SliverToBoxAdapter(child: Hmsuggestion(specialRecommendResult: _specialRecommendResult)),
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
         child: Padding(
@@ -59,13 +80,6 @@ class _HomeViewState extends State<HomeView> {
     ];
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _getBannerList();
-    _getCategoryList();
-  }
 
   /// 获取banner列表
   void _getBannerList() async{
