@@ -2,6 +2,7 @@ class GlobalConstants {
   static const String Base_Url = 'https://meikou-api.itheima.net';
   static const int Timeout = 10;
   static const String Success_Code = '1';
+  static const String Token_Key = 'hm_shop_token';  // token键名
 }
 
 class HttpConstants {
@@ -13,4 +14,5 @@ class HttpConstants {
   static const String RECOMMEND_LIST = "/home/recommend"; // 推荐列表
   static const String Guess_LIST = "/home/goods/guessLike"; // 猜你喜欢列表
   static const String LOGIN = "/login"; // 登录
+  static const String USER_PROFILE = "/member/profile"; // 用户信息
 }

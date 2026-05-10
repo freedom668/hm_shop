@@ -15,7 +15,7 @@ class MineView extends StatefulWidget {
 }
 
 class _MineViewState extends State<MineView> {
-  final UserContainer _userController = Get.put(UserContainer());
+  final UserContainer _userController = Get.find();
 
   Widget _buildHeader() {
     return Container(
