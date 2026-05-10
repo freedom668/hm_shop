@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hm_shop/api/user.dart';
 import 'package:hm_shop/stores/UserContrain.dart';
 import 'package:hm_shop/stores/tokenmanger.dart';
+import 'package:hm_shop/utils/Loading.dart';
 import 'package:hm_shop/utils/ToastUtils.dart';
 
 class LoginPage extends StatefulWidget {
@@ -72,15 +73,18 @@ class _LoginPageState extends State<LoginPage> {
 
   _login() async {
     try {
+      Loading.show(context, message: "登录中...");
       final res = await loginApi({
         "account": _phoneController.text,
         "password": _codeController.text,
       });
       _userController.updateUserInfo(res);
-      tokenManager.setToken(res.token);// 保存token 到本地
+      tokenManager.setToken(res.token); // 保存token 到本地
+      Loading.hide(context);
       ToastUtils.showToast(context, '登录成功');
       Navigator.pop(context);
     } catch (e) {
+      Loading.hide(context);
       ToastUtils.showToast(context, (e as DioException).message ?? '登录失败');
     }
   }
