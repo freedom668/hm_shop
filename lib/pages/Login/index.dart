@@ -1,13 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hm_shop/api/user.dart';
 import 'package:hm_shop/utils/ToastUtils.dart';
- 
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
- 
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
- 
+
 class _LoginPageState extends State<LoginPage> {
   TextEditingController _phoneController = TextEditingController(); // 账号控制器
   TextEditingController _codeController = TextEditingController(); // 密码控制器
@@ -36,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
- 
+
   // 用户密码Widget
   Widget _buildCodeTextField() {
     return TextFormField(
@@ -44,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         if (value == null || value.isEmpty) {
           return '密码不能为空';
         }
-        if(!RegExp(r'^[0-9a-zA-Z_]{6,16}$').hasMatch(value)){
+        if (!RegExp(r'^[0-9a-zA-Z_]{6,16}$').hasMatch(value)) {
           return '请输入6-16位数字、字母或下划线';
         }
         return null;
@@ -63,7 +65,19 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
- 
+
+  _login() async{
+    try{
+      final res = await loginApi({
+        "account": _phoneController.text,
+        "password": _codeController.text,
+      });
+      ToastUtils.showToast(context, '登录成功');
+      Navigator.pop(context);
+    }catch(e){
+      ToastUtils.showToast(context, (e as DioException).message ?? '登录失败');
+    }
+  }
   // 登录按钮Widget
   Widget _buildLoginButton() {
     return SizedBox(
@@ -72,11 +86,12 @@ class _LoginPageState extends State<LoginPage> {
       child: ElevatedButton(
         onPressed: () {
           // 登录逻辑
-          if(_Key.currentState! .validate()){
-            if(_isChecked){
+          if (_Key.currentState!.validate()) {
+            if (_isChecked) {
               // 登录通过
-            }else{
-              ToastUtils.showToast(context,'请先同意隐私条款和用户协议');
+              _login();
+            } else {
+              ToastUtils.showToast(context, '请先同意隐私条款和用户协议');
             }
           }
         },
@@ -90,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
- 
+
   bool _isChecked = false;
   // 勾选Widget
   Widget _buildCheckbox() {
@@ -131,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
- 
+
   // 头部Widget
   Widget _buildHeader() {
     return Row(
@@ -146,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
- 
+
   final GlobalKey<FormState> _Key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
