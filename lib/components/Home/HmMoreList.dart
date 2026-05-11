@@ -68,7 +68,7 @@ class _HmMoreListState extends State<HmMoreList> {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colors.black87,
-                    fontSize: 14, // 调整字体大小，20太大了
+                    fontSize: 16, // 调整字体大小，20太大了
                     fontWeight: FontWeight.w500,
                   ),
                 ),
